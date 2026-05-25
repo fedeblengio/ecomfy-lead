@@ -1,5 +1,19 @@
 # EcomfyApp Mini Lead Routing Engine - Technical Documentation
 
+## Stack Selection
+
+**Python + FastAPI + SQLite** was chosen for the following reasons:
+
+- **FastAPI** over Express/Flask: built-in request validation via Pydantic, automatic Swagger documentation, native async support for simulating buyer webhook timeouts, and type safety throughout the codebase.
+- **SQLAlchemy ORM** over raw SQL: provides a clean data model layer, relationship management, and makes switching from SQLite to PostgreSQL a one-line configuration change.
+- **SQLite** for the MVP: zero infrastructure setup, runs locally without Docker, and the schema is fully portable to PostgreSQL for production.
+- **Pydantic** handles input validation (email format, phone format) at the API boundary, keeping service logic clean.
+- **OpenAI API** for the optional AI summary: receives pre-calculated metrics and generates an executive report. The AI does not make routing decisions or generate data.
+
+This stack prioritizes fast local setup, testability, and clear separation of concerns while remaining production-scalable.
+
+---
+
 ## Architecture
 
 The application is built as a **FastAPI monolith** backed by **SQLite** via **SQLAlchemy ORM**.
