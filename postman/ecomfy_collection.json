@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "EcomfyApp Mini Lead Routing Engine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "lead_id",
+			"value": ""
+		}
+	],
+	"item": [
+		{
+			"name": "Seed Data",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/seed",
+					"host": ["{{base_url}}"],
+					"path": ["seed"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Valid Lead",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"first_name\": \"John\",\n\t\"last_name\": \"Smith\",\n\t\"phone\": \"3051234567\",\n\t\"email\": \"john.smith@example.com\",\n\t\"state\": \"FL\",\n\t\"vertical\": \"Life Insurance\",\n\t\"source\": \"google_ads\",\n\t\"trusted_form_cert_url\": \"https://cert.trustedform.com/abc123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/leads",
+					"host": ["{{base_url}}"],
+					"path": ["leads"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Duplicate Lead",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"first_name\": \"John\",\n\t\"last_name\": \"Smith\",\n\t\"phone\": \"3051234567\",\n\t\"email\": \"john.smith@example.com\",\n\t\"state\": \"FL\",\n\t\"vertical\": \"Life Insurance\",\n\t\"source\": \"google_ads\",\n\t\"trusted_form_cert_url\": \"https://cert.trustedform.com/abc123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/leads",
+					"host": ["{{base_url}}"],
+					"path": ["leads"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Lead Missing Email",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"first_name\": \"John\",\n\t\"last_name\": \"Smith\",\n\t\"phone\": \"3051234567\",\n\t\"state\": \"FL\",\n\t\"vertical\": \"Life Insurance\",\n\t\"source\": \"google_ads\",\n\t\"trusted_form_cert_url\": \"https://cert.trustedform.com/abc123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/leads",
+					"host": ["{{base_url}}"],
+					"path": ["leads"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Lead Missing Cert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"first_name\": \"John\",\n\t\"last_name\": \"Smith\",\n\t\"phone\": \"3051234567\",\n\t\"email\": \"john.smith@example.com\",\n\t\"state\": \"FL\",\n\t\"vertical\": \"Life Insurance\",\n\t\"source\": \"google_ads\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/leads",
+					"host": ["{{base_url}}"],
+					"path": ["leads"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Leads",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/leads",
+					"host": ["{{base_url}}"],
+					"path": ["leads"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Buyers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/buyers",
+					"host": ["{{base_url}}"],
+					"path": ["buyers"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return Lead",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"reason\": \"bad quality\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/leads/{{lead_id}}/return",
+					"host": ["{{base_url}}"],
+					"path": ["leads", "{{lead_id}}", "return"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Daily Summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reports/daily-summary",
+					"host": ["{{base_url}}"],
+					"path": ["reports", "daily-summary"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Alerts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/alerts",
+					"host": ["{{base_url}}"],
+					"path": ["alerts"]
+				}
+			},
+			"response": []
+		}
+	]
+}
